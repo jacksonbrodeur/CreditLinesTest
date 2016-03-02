@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  apr: 1.5
+  limit: 1.5
+  amount_drawn: 1.5
+
+two:
+  apr: 1.5
+  limit: 1.5
+  amount_drawn: 1.5

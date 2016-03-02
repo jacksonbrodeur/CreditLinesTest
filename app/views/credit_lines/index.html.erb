@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Credit Lines</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Apr</th>
+      <th>Limit</th>
+      <th>Amount drawn</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @credit_lines.each do |credit_line| %>
+      <tr>
+        <td><%= credit_line.apr %></td>
+        <td><%= credit_line.limit %></td>
+        <td><%= credit_line.amount_drawn %></td>
+        <td><%= link_to 'Show', credit_line %></td>
+        <td><%= link_to 'Edit', edit_credit_line_path(credit_line) %></td>
+        <td><%= link_to 'Destroy', credit_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Credit line', new_credit_line_path %>

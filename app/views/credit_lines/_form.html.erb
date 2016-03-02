@@ -1,0 +1,25 @@
+<%= form_for(@credit_line) do |f| %>
+  <% if @credit_line.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@credit_line.errors.count, "error") %> prohibited this credit_line from being saved:</h2>
+
+      <ul>
+      <% @credit_line.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :apr %><br>
+    <%= f.text_field :apr %>
+  </div>
+  <div class="field">
+    <%= f.label :limit %><br>
+    <%= f.text_field :limit %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

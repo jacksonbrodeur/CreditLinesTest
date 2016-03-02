@@ -1,0 +1,63 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Apr:</strong>
+  <%= @credit_line.apr %>
+</p>
+
+<p>
+  <strong>Limit:</strong>
+  <span class="money">
+    <%= @credit_line.limit %>
+  </span>
+</p>
+
+<p>
+  <strong>Amount drawn:</strong>
+  <span class="money">
+    <%= @credit_line.amount_drawn %>
+  </span>
+</p>
+
+<% if !@credit_line.transactions.blank? %>
+<strong> Transactions </strong>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Amount</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @credit_line.transactions.each_with_index do |transaction, index| %>
+      <% if index == @credit_line.transactions.length - 1  && flash[:redirect]%> 
+        <tr id="newest">
+      <% else %>
+        <tr>
+      <% end %>
+        <td align="center"><%= transaction.transaction_type %></td>
+        <td class="money" align="right"><%= transaction.amount %></td>
+        <td><%= transaction.date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+  
+<% end %>
+
+<%= link_to 'Edit', edit_credit_line_path(@credit_line) %> |
+<%= link_to 'Back', credit_lines_path %>
+<%= link_to 'New Transaction', new_credit_line_transaction_path(@credit_line.id) %>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#newest").effect("highlight", {}, 5000)
+    $(".money").each(function() {
+      $(this).text('$' + parseFloat($(this).text(), 10).toFixed(2).toString());
+    });
+  });
+</script>
