@@ -19,6 +19,13 @@
   </span>
 </p>
 
+<p>
+  <strong>Interest:</strong>
+  <span class="money">
+    <%= @credit_line.interest %>
+  </span>
+</p>
+
 <% if !@credit_line.transactions.blank? %>
 <strong> Transactions </strong>
 <table>

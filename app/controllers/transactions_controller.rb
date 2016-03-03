@@ -25,7 +25,6 @@ class TransactionsController < ApplicationController
   # POST /transactions
   # POST /transactions.json
   def create
-    puts YAML::dump(transaction_params)
     @transaction = Transaction.new(transaction_params.merge credit_line_id: params[:credit_line_id])
     @credit_line = CreditLine.find(@transaction.credit_line_id)
 
@@ -40,9 +39,9 @@ class TransactionsController < ApplicationController
         else
           @credit_line.amount_drawn += @transaction.amount
         end
+        @credit_line.interest = calculate_interest(@credit_line.transactions, @credit_line.apr)
         @credit_line.save
       else
-        puts "ELSE"
         format.html { render :action => :new }
         # format.html { redirect_to new_credit_line_transaction_path(@transaction.credit_line_id), notice: 'There were '}
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
@@ -83,5 +82,31 @@ class TransactionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
       params.require(:transaction).permit(:transaction_type, :credit_line_id, :amount, :date)
+    end
+
+    def calculate_interest(transactions, apr)
+      balance = 0
+      transactions.each do |transaction|
+        if transaction.transaction_type.eql? "Payment"
+          balance -= transaction.amount
+        else
+          balance += transaction.amount
+        end
+      end
+
+      interest = 0
+      last_day = transactions.first.date.to_datetime + 30
+      transactions.reverse_each do |transaction|
+        num_days = last_day.mjd - transaction.date.to_datetime.mjd
+        last_day = transaction.date.to_datetime
+        interest += balance * apr / 360 * num_days
+        if transaction.transaction_type.eql? "Payment"
+          balance += transaction.amount
+        else
+          balance -= transaction.amount
+        end
+      end
+
+      return interest
     end
 end

@@ -6,5 +6,6 @@ class CreditLine < ActiveRecord::Base
   private
     def default_values
       self.amount_drawn ||= 0
+      self.interest ||= 0
     end
 end
