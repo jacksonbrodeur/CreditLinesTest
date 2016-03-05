@@ -99,7 +99,7 @@ class TransactionsController < ApplicationController
       transactions.reverse_each do |transaction|
         num_days = last_day.mjd - transaction.date.to_datetime.mjd
         last_day = transaction.date.to_datetime
-        interest += balance * apr / 360 * num_days
+        interest += balance * apr / 365 * num_days
         if transaction.transaction_type.eql? "Payment"
           balance += transaction.amount
         else
