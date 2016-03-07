@@ -11,19 +11,21 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :transaction_type %><br>
-    <%= f.select :transaction_type, ["Payment", "Withdrawal"] %>
+    <%= f.select :transaction_type, ["Payment", "Withdrawal"], {}, class: 'form-control'%>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :amount %><br>
-    <%= f.text_field :amount %>
+    <%= f.number_field :amount, class: "form-control", step: 50%>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :date %><br>
-    <%= f.datetime_select :date %>
+    <%= f.datetime_select :date, {}, class: 'form-control' %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="actions form-group">
+      <%= f.submit class: "btn btn-default"%>
   </div>
+
 <% end %>

@@ -2,4 +2,6 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Back', credit_line_transactions_path %>
+<%= button_to 'Back', credit_line_path(id: @credit_line.id), method: 'get', class: "btn btn-default"%>
+
+

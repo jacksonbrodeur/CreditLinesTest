@@ -1,39 +1,37 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Apr:</strong>
-  <%= @credit_line.apr %>
-</p>
+<div class="page-header">
+  <h1>Credit Line <%= @credit_line.id %></h1>
 
-<p>
-  <strong>Limit:</strong>
+
+<ul class="list-inline">
+
+  <li><strong>Apr:</strong>
+  <%= @credit_line.apr %></li>
+  <li><strong>Limit:</strong>
   <span class="money">
     <%= @credit_line.limit %>
-  </span>
-</p>
-
-<p>
-  <strong>Amount drawn:</strong>
+  </span></li>
+  <li><strong>Amount drawn:</strong>
   <span class="money">
     <%= @credit_line.amount_drawn %>
-  </span>
-</p>
-
-<p>
-  <strong>Interest:</strong>
+  </span></li>
+  <li><strong>Interest:</strong>
   <span class="money">
     <%= @credit_line.interest %>
-  </span>
-</p>
+  </span></li>
+
+</ul>
+</div>
 
 <% if !@credit_line.transactions.blank? %>
 <strong> Transactions </strong>
-<table>
+<table class = "table" style="width: auto;">
   <thead>
     <tr>
-      <th>Type</th>
-      <th>Amount</th>
-      <th>Date</th>
+      <th align="left">Type</th>
+      <th align="left">Amount</th>
+      <th align="left">Date</th>
     </tr>
   </thead>
 
@@ -44,8 +42,8 @@
       <% else %>
         <tr>
       <% end %>
-        <td align="center"><%= transaction.transaction_type %></td>
-        <td class="money" align="right"><%= transaction.amount %></td>
+        <td><%= transaction.transaction_type %></td>
+        <td class="money" align="left"><%= transaction.amount %></td>
         <td><%= transaction.date %></td>
       </tr>
     <% end %>
@@ -55,8 +53,7 @@
   
 <% end %>
 
-<%= link_to 'Edit', edit_credit_line_path(@credit_line) %> |
-<%= link_to 'Back', credit_lines_path %>
+<%= link_to 'Back', credit_lines_path %> |
 <%= link_to 'New Transaction', new_credit_line_transaction_path(@credit_line.id) %>
 
 
