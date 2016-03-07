@@ -9,7 +9,7 @@ This project is used as a test for simulating lines of credit over a period of 3
 To run the project execute the following commands in the terminal:
 
 ```
-git clone git@github.com:Project/project.git [A public project of github]
+git clone git@github.com:jacksonbrodeur/CreditLinesTest.git
 cd line_of_credit
 bundle install
 rake db:migrate
