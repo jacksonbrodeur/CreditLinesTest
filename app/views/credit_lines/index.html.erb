@@ -9,6 +9,7 @@
       <th>Apr</th>
       <th>Limit</th>
       <th>Amount drawn</th>
+      <th>Interest</th>
     </tr>
   </thead>
 
@@ -19,10 +20,11 @@
         <td><%= credit_line.apr %></td>
         <td class="money"><%= credit_line.limit %></td>
         <td class="money" align="right"><%= credit_line.amount_drawn %></td>
+        <td class="money" align="right"><%= credit_line.interest %></td>
       </tr>
     <% end %>
     <tr>
-      <td colspan=4><%= link_to 'New Credit line', new_credit_line_path %></td>
+      <td colspan=5><%= link_to 'New Credit line', new_credit_line_path %></td>
     </tr>
   </tbody>
 </table>
