@@ -22,6 +22,9 @@ class Transaction < ActiveRecord::Base
   def date_valid
     credit_line = CreditLine.find(self.credit_line_id)
     transactions = credit_line.transactions
+    if transactions.empty?
+      return
+    end
     if self.date.to_datetime.mjd >= transactions.first.date.to_datetime.mjd + 30
       errors.add(:date, "is outside of the 30 day period (#{transactions.first.date.to_date} - #{transactions.first.date.to_date + 30})")
     elsif self.date.to_datetime.mjd <= transactions.last.date.to_datetime.mjd
